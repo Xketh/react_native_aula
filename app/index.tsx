@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Text, View, StyleSheet, Button} from "react-native";
+import ListaProdutos from "./Componentes/Adaptadores/ListaProdutos";
 
 const produtos = [
 
@@ -19,16 +20,8 @@ export default function Index() {
     <View
      style={estilo.container}
     >
-      {produtos.map((p)=>(
-
-        <View key={p.id}>
-          
-        <Text style= {estilo.title}>{p.nome}</Text>
-        <Text style= {estilo.text}>{p.preco}</Text>
-        </View>
-
-       )
-      )}
+      <ListaProdutos produtos={produtos}></ListaProdutos>
+      
   <Button title= {`Clicado ${contador.toString()} vezes`} onPress={()=>{ClicarBotao()}}>
 
 </Button>
@@ -49,10 +42,11 @@ const estilo= StyleSheet.create ({
   container:{
   flex: 1,
   justifyContent: "center",
-  alignItems: "flex-Start",
+  alignItems: "flex-start",
   backgroundColor:"#000000",
-  paddingStar:20,
+  paddingStart:20,
 },
+
 text: { 
   color:"#ffffff",
   fontSize: 20,
