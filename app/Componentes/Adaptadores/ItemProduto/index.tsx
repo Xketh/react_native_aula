@@ -1,14 +1,17 @@
+import Style from "@/app/Style/Default";
 import {Text, View } from "react-native";
 
 
 function ItemProduto ({produto}: {produto: {nome:string, preco:number}}){
 
+    console.log(produto)
+
     return (
 
-        <View> 
+        <View style={Style.card}>
 
-            <Text>{produto.nome}</Text>
-            <Text>{produto.preco}</Text>
+            <Text style= {Style.cardText}>{produto.nome}</Text>
+            <Text style= {Style.cardText}>{produto.preco}</Text>
 
         </View>
 
