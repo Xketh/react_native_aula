@@ -1,30 +1,42 @@
-import { useState } from "react";
+import {useState } from "react";
 import { Text, View, StyleSheet, Button} from "react-native";
 import ListaProdutos from "./Componentes/Adaptadores/ListaProdutos";
-
-const produtos = [
-
-  {id: 1, nome: "Coca-cola", preco: 5.5},
-  {id: 2, nome: "Sukita", preco: 5.5},
-  {id: 3, nome: "Guarana Jesus", preco: 5.5},
-  {id: 4, nome: "Dolly", preco: 5.5},
-];
+import axios from 'axios';
+import {useEffect} from  "react";
 
 
 export default function Index() {
 
   let [contador,setContador]= useState(0);
+  let [produtos,setProdutos] = useState([]);
+
+  useEffect(()=>{
+
+  carregarProdutos ();
+
+  }, [])
+
+  function carregarProdutos (){
+
+  axios.get ('https://api-docker-2t8m.onrender.com/api/produtos')
+  .then((resp)=>{
+   setProdutos (resp.data);
+  })
+  }
 
 
   return (
     <View
      style={estilo.container}
     >
-      <ListaProdutos produtos={produtos}></ListaProdutos>
+      <ListaProdutos produtos={produtos}/>
       
-  <Button title= {`Clicado ${contador.toString()} vezes`} onPress={()=>{ClicarBotao()}}>
+  <Button title= {`Clicado ${contador.toString()}  vezes`} onPress={()=>{ClicarBotao()}}>
 
 </Button>
+
+    <CadastroProduto/>
+
     </View>
   );
 
@@ -34,9 +46,6 @@ export default function Index() {
   }
 
 }
-
-
-
 
 const estilo= StyleSheet.create ({
   container:{
